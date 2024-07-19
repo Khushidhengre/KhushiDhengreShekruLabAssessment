@@ -7,3 +7,4 @@ namespace ShekruLabAssessment.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+

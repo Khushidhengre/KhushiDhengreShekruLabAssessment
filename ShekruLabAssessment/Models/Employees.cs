@@ -52,6 +52,7 @@ namespace ShekruLabAssessment.Models
         public string GradeName { get; set; }
         public int DesignationIdRef { get; set; }
 
+
  
 
     }

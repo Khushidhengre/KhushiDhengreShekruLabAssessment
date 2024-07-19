@@ -59,6 +59,7 @@ namespace ShekruLabAssessment.Controllers
         }
 
 
+
         public IActionResult UserList()
         {
             List<Display> obj;

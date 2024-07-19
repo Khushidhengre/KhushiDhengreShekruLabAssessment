@@ -9,6 +9,7 @@ namespace ShekruLabAssessment.Models
 
         public virtual DbSet<Employees> employees { get; set; }
 
+
         public virtual DbSet<Display> display { get; set; }
         public virtual DbSet<Designation> designation { get; set; }
         public virtual DbSet<DesignationGrade> designationgrade { get; set; }

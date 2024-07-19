@@ -12,7 +12,8 @@
 	} else if (typeof module === "object" && module.exports) {
 		module.exports = factory( require( "jquery" ) );
 	} else {
-		factory( jQuery );
+		factory(jQuery);
+
 	}
 }(function( $ ) {
 

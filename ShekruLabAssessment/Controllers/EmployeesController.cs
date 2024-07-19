@@ -4,6 +4,7 @@ using ShekruLabAssessment.Models;
 
 namespace ShekruLabAssessment.Controllers
 {
+
     public class EmployeesController : Controller
     {
         public readonly DatabaseContext _context;
