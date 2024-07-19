@@ -1,0 +1,126 @@
+﻿@model ShekruLabAssessment.Models.Employees
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Edit Employees List </h4>
+<style>
+    h4 {
+        margin-right: 315px;
+        margin-left: 327px;
+        font-size: xx-large;
+        background-color: darkgrey;
+    }
+
+    .col-md-4 {
+        margin-left: 337px;
+        background-color: darkgray;
+        flex: 0 0 auto;
+        width: 49.333333%;
+    }
+</style>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddEmployees">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label" style="font-weight: bold;"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label" style="font-weight: bold;"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddess" class="control-label" style="font-weight: bold;"></label>
+                <input asp-for="EmailAddess" class="form-control" />
+                <span asp-validation-for="EmailAddess" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label" style="font-weight: bold;"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DesignationIdRef" class="control-label" style="font-weight: bold;"></label>
+
+                <select asp-for="DesignationIdRef" class="form-control"
+                        asp-items="ViewBag.Designation"
+                        id="Designations"></select>
+
+                <span asp-validation-for="DesignationIdRef" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GradeIdRef" class="control-label" style="font-weight: bold;"></label>
+                <select asp-for="GradeIdRef" id="Grades" class="form-control">
+                </select>
+                <span asp-validation-for="GradeIdRef" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                <a asp-action="UserList" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@section scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+           
+                var DesignationId = $(this).val();
+                $.getJSON('@Url.Action("GetGrades")', { DesignationId: DesignationId }, function (grades) {
+                    var selectgrades = $('#Grades');
+                    selectgrades.empty();
+                    $.each(grades, function (index, grade) {
+                        selectgrades.append($('<option/>', {
+                            value: grade.value,
+
+                            text: grade.text
+
+                        }));
+
+                    });
+                });
+          
+
+        });
+
+        $(document).ready(function () {
+            $('#Designations').change(function () {
+                var DesignationId = $(this).val();
+                $.getJSON('@Url.Action("GetGrades")', { DesignationId: DesignationId }, function (grades) {
+                    var selectgrades = $('#Grades');
+                    selectgrades.empty();
+                    $.each(grades, function (index, grade) {
+                        selectgrades.append($('<option/>', {
+                            value: grade.value,
+
+                            text: grade.text
+
+                        }));
+
+                    });
+                });
+            });
+
+        });
+
+    </script>
+}

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ShekruLabAssessment.Models.Display>
+
+@{
+    ViewData["Title"] = "UserList";
+}
+
+<h1>EMPLOYEE LIST</h1>
+<style>
+    .table > :not(caption) > * > * {
+        padding: 1.5rem .5rem;
+        background-color: #eae198;
+        border-bottom-width: 2px;
+        box-shadow: ghostwhite;
+        border-block-color: initial;
+    }
+
+    .th{
+        border-color: black;
+        border-style: solid;
+        border-width: 0px;
+    }
+    
+</style>
+
+<p>
+    <a asp-action="AddEmployees" class="btn btn-primary">Go Back</a>
+   
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddess)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DesignationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddess)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesignationName)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.GradeName)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" style="padding-left: 8px;">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

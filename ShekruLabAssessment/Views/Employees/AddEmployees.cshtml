@@ -1,0 +1,83 @@
+﻿@model ShekruLabAssessment.Models.Employees
+
+@{
+    ViewData["Title"] = "AddEmployees";
+}
+
+<h4>AddEmployees</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddEmployees">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddess" class="control-label"></label>
+                <input asp-for="EmailAddess" class="form-control" />
+                <span asp-validation-for="EmailAddess" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DesignationIdRef" class="control-label"></label>
+
+                <select asp-for="DesignationIdRef" class="form-control"
+                        asp-items="ViewBag.CategoryData"
+                        id="CategoryId" onchange="loadProduct(this)"></select>
+
+                <span asp-validation-for="DesignationIdRef" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GradeIdRef" class="control-label"></label>
+                <select id="States" name="StateId">
+                    <option value="">Select State</option>
+                </select>
+                <span asp-validation-for="GradeIdRef" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@section scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Countries').change(function () {
+                var countryId = $(this).val();
+                $.getJSON('@Url.Action("GetStates")', { countryId: countryId }, function (states) {
+                    var statesSelect = $('#States');
+                    statesSelect.empty();
+                    $.each(states, function (index, state) {
+                        statesSelect.append($('<option/>', {
+                            value: state.value,
+                            text: state.text
+                        }));
+                    });
+                });
+            });
+
+        });
+    </script>
+}
